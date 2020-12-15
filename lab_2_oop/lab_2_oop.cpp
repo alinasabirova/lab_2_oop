@@ -3,137 +3,132 @@
 
 using namespace std;
 
-class Room { //объявили класс
+class Floor { //объявили класс
 protected:
-	int table_size, bed_size;
+	int lenght, width; //атрибуты
 public:
-	//int table_size, bed_size;
-	Room() { //конструктор без параметров
-		cout << "Room()" << endl;
-		table_size = 0;
-		bed_size = 0;
+	//int lenght, width;
+	Floor() { //конструктор без параметров
+		cout << "Floor()" << endl;
+		lenght = 0;
+		width = 0;
 	}
-	Room(int table_size, int bed_size) { //конструктор с параметрами
-		cout << "Room(int table_size, int bed_size)" << endl;
-		this->table_size = table_size;
-		this->bed_size = bed_size;
+	Floor(int lenght, int width) { //конструктор с параметрами
+		cout << "Floor(int lenght, int width)" << endl;
+		this->lenght = lenght;
+		this->width = width;
 	}
-	Room(const Room& p) { //конструктор копирования - переносит все свойства из того объекта, который передали
-		cout << "Room(const Room &p)" << endl;
-		table_size = p.table_size;
-		bed_size = p.bed_size;
+	Floor(const Floor& p) { //конструктор копирования - переносит все свойства из того объекта, который передали
+		cout << "Floor(const Floor &p)" << endl;
+		lenght = p.lenght;
+		width = p.width;
 	}
-	~Room() { //деструктор
-		cout << table_size << ", " << bed_size << endl;
-		cout << "~Room()" << endl;
+	~Floor() { //деструктор
+		cout << lenght << ", " << width << endl;
+		cout << "~Floor()" << endl;
 	}
 	void change_size(int s1, int s2) { //метод 
-		table_size = table_size + s1;
-		bed_size = bed_size + s2;
+		lenght = lenght + s1;
+		width = width + s2;
 	}
 	void def_size();
 };
 
-void Room::def_size() {
-	table_size = 2;
-	bed_size = 3;
+void Floor::def_size() {
+	lenght = 2;
+	width = 3;
 }
 
-class BigRoom : public Room { //класс наследник
+class laminate : public Floor { //класс наследник
 protected:
-	int size;
+	string color;
 public:
-	//int table_size, bed_size;
-	BigRoom() : Room() { //конструктор без параметров
-		cout << "BigRoom()" << endl;
-		size = 0;
+	laminate() : Floor() { //конструктор без параметров
+		cout << "laminate()" << endl;
+		color = "";
 	}
-	BigRoom(int table_size, int bed_size, int size) : Room(table_size, bed_size) { //конструктор с параметрами
-		cout << "BigRoom(int table_size, int bed_size)" << endl;
-		this->size = size;
+	laminate(int lenght, int width, string color) : Floor(lenght, width) { //конструктор с параметрами
+		cout << "laminate(int lenght, int width)" << endl;
+		this->color = color;
 	}
-	BigRoom(const BigRoom& p) { //конструктор копирования - переносит все свойства из того объекта, который передали
-		cout << "BigRoom(const Room &p)" << endl;
-		size = p.size;
-		table_size = p.table_size;
-		bed_size = p.bed_size;
+	laminate(const laminate& p) { //конструктор копирования - переносит все свойства из того объекта, который передали
+		cout << "laminate(const Floor &p)" << endl;
+		color = p.color;
+		lenght = p.lenght;
+		width = p.width;
 	}
-	~BigRoom() { //деструктор
-		cout << table_size << ", " << bed_size << ", size - " << size << endl;
-		cout << "~BigRoom()" << endl;
+	~laminate() { //деструктор
+		cout << lenght << ", " << width << ", color - " << color << endl;
+		cout << "~laminate()" << endl;
 	}
-	void change_room_size(int new_room_size) {
-		size = new_room_size;
+	void change_color(int new_color) {
+		color = new_color;
 	}
 };
 
-class Floor {
+class Room {
 protected:
-	Room* r1;
-	Room* r2;
+	Floor* r1;
+	Floor* r2;
 public:
-	//int table_size, bed_size;
-	Floor() { //конструктор без параметров
-		cout << "Floor()" << endl;
-		r1 = new Room;
-		r2 = new Room;
+	Room() { //конструктор без параметров
+		cout << "Room()" << endl;
+		r1 = new Floor;
+		r2 = new Floor;
 	}
-	Floor(int table1_size, int bed1_size, int table2_size, int bed2_size) { //конструктор с параметрами
-		cout << "Floor(int table1_size, int bed2_size, int table2_size, int bed2_size)" << endl;
-		r1 = new Room(table1_size, bed1_size);
-		r2 = new Room(table2_size, bed2_size);
+	Room(int lenght1, int width1, int lenght2, int width2) { //конструктор с параметрами
+		cout << "Room(int lenght1, int width2, int lenght2, int width2)" << endl;
+		r1 = new Floor(lenght1, width1);
+		r2 = new Floor(lenght2, width2);
 	}
-	Floor(const Floor& s) { //конструктор копирования - переносит все свойства из того объекта, который передали
-		cout << "Floor(const Floor &p)" << endl;
-		r1 = new Room(*(s.r1)); //копируем путем вызывания конструктора копирования точки
-		r2 = new Room(*(s.r2)); //s-объект r1-указатель на point
+	Room(const Room& s) { //конструктор копирования - переносит все свойства из того объекта, который передали
+		cout << "Room(const Room &p)" << endl;
+		r1 = new Floor(*(s.r1)); //копируем путем вызывания конструктора копирования точки
+		r2 = new Floor(*(s.r2)); //s-объект r1-указатель на point
 	}
-	~Floor() { //деструктор
+	~Room() { //деструктор
 		delete r1;
 		delete r2;
-		cout << "~Floor()" << endl;
+		cout << "~Room()" << endl;
 	}
-
 };
 
 int main() {
-	//статически созданные объекты и их удаление
 	{
-		Room a;
-		Room b(3, 4);
-		Room c(b);
+		Floor a;
+		Floor b(3, 4);
+		Floor c(b);
 	}
 	cout << endl;
-
-	Room* a1 = new Room(8, 8); //создается переменная-указатель на класс Room, выделяется память (в классе Room), переменной-указателю присваивается адрес в память 
+	                        
+	Floor* a1 = new Floor(8, 8); 
 	a1->def_size();
 	a1->change_size(2, 2);
-	delete a1; //удаляем явно, иначе объект останется в памяти (переменные-указатели удаляются после скобок)
+	delete a1; 
 	cout << endl;
 
-	//динамически созданные объекты:
-	Room* d = new Room;
-	Room* e = new Room(5, 7);
-	Room* f = new Room(*e);
-	//удаление динамически созданных объектов
+	Floor* d = new Floor;
+	Floor* e = new Floor(5, 7);
+	Floor* f = new Floor(*e);
 	delete d;
 	delete e;
 	delete f;
 	cout << endl;
 
-	BigRoom* g = new BigRoom(2, 3, 20);//создается объект класса BigRoom, вызывается сначала конструктор Room затем BigRoom
+	laminate* l = new laminate();
+	laminate* g = new laminate(2, 3, "black");
+	laminate* n = new laminate(*g);
+	delete l; 
 	delete g;
+	delete n;
 	cout << endl;
 
-
-	//помещение объектов в переменные различных типов
-   //если есть переменная-указатель на базовый класс, то в нее можно поместить объект потомка
-	Room* w = new BigRoom(2, 3, 20); //создается объект класса BigRoom но у нас нет доступа к методам и свойствам класса BigRoom, вызыв констр Room затем BigRoom
-	delete w; //неправильно удаляется, деструктор вызывается только для point()(базовово класса)
+	Floor* w = new laminate(2, 3, "white"); 
+	delete w; 
 	cout << endl;
-							//композиция
-	Floor* h = new Floor;
-	Floor* y = new Floor(*h);
+					
+	Room* h = new Room;
+	Room* y = new Room(*h);
 	delete h;
 	delete y;
 	cout << endl;
