@@ -3,11 +3,10 @@
 
 using namespace std;
 
-class Floor { //объявили класс
+class Floor { 
 protected:
-	int lenght, width; //атрибуты
+	int lenght, width; 
 public:
-	//int lenght, width;
 	Floor() { //конструктор без параметров
 		cout << "Floor()" << endl;
 		lenght = 0;
@@ -18,7 +17,7 @@ public:
 		this->lenght = lenght;
 		this->width = width;
 	}
-	Floor(const Floor& p) { //конструктор копирования - переносит все свойства из того объекта, который передали
+	Floor(const Floor& p) { //конструктор копирования
 		cout << "Floor(const Floor &p)" << endl;
 		lenght = p.lenght;
 		width = p.width;
@@ -27,7 +26,7 @@ public:
 		cout << lenght << ", " << width << endl;
 		cout << "~Floor()" << endl;
 	}
-	void change_size(int s1, int s2) { //метод 
+	void change_size(int s1, int s2) {
 		lenght = lenght + s1;
 		width = width + s2;
 	}
@@ -51,7 +50,7 @@ public:
 		cout << "laminate(int lenght, int width)" << endl;
 		this->color = color;
 	}
-	laminate(const laminate& p) { //конструктор копирования - переносит все свойства из того объекта, который передали
+	laminate(const laminate& p) { //конструктор копирования 
 		cout << "laminate(const Floor &p)" << endl;
 		color = p.color;
 		lenght = p.lenght;
@@ -81,10 +80,10 @@ public:
 		r1 = new Floor(lenght1, width1);
 		r2 = new Floor(lenght2, width2);
 	}
-	Room(const Room& s) { //конструктор копирования - переносит все свойства из того объекта, который передали
+	Room(const Room& s) { //конструктор копирования 
 		cout << "Room(const Room &p)" << endl;
-		r1 = new Floor(*(s.r1)); //копируем путем вызывания конструктора копирования точки
-		r2 = new Floor(*(s.r2)); //s-объект r1-указатель на point
+		r1 = new Floor(*(s.r1));
+		r2 = new Floor(*(s.r2));
 	}
 	~Room() { //деструктор
 		delete r1;
