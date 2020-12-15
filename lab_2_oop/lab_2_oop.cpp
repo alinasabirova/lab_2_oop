@@ -3,7 +3,7 @@
 
 using namespace std;
 
-class Room {
+class Room { //объявили класс
 protected:
 	int table_size, bed_size;
 public:
@@ -27,7 +27,7 @@ public:
 		cout << table_size << ", " << bed_size << endl;
 		cout << "~Room()" << endl;
 	}
-	void change_size(int s1, int s2) {
+	void change_size(int s1, int s2) { //метод 
 		table_size = table_size + s1;
 		bed_size = bed_size + s2;
 	}
@@ -93,6 +93,7 @@ public:
 		delete r2;
 		cout << "~Floor()" << endl;
 	}
+
 };
 
 int main() {
@@ -104,10 +105,10 @@ int main() {
 	}
 	cout << endl;
 
-	Room* a1 = new Room(8, 8);
+	Room* a1 = new Room(8, 8); //создается переменная-указатель на класс Room, выделяется память (в классе Room), переменной-указателю присваивается адрес в память 
 	a1->def_size();
 	a1->change_size(2, 2);
-	delete a1;
+	delete a1; //удаляем явно, иначе объект останется в памяти (переменные-указатели удаляются после скобок)
 	cout << endl;
 
 	//динамически созданные объекты:
@@ -135,7 +136,7 @@ int main() {
 	Floor* y = new Floor(*h);
 	delete h;
 	delete y;
-
+	cout << endl;
 
 	return 0;
 }
